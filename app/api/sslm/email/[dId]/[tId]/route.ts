@@ -55,14 +55,15 @@ export async function GET(
                     html: '이메일 발송 테스트 입니다',
                 };
 
-                await sendEmail(data);
-                return NextResponse.json({ result: true });
+                const resultBool = await sendEmail(data);
+                return NextResponse.json({ result: resultBool });
             }
         }
     } catch (e) {
+        await writeLog(`이메일 발송 실패`);
         return NextResponse.json({ result: false });
     }
-    await writeLog(`발송 실패`);
+    await writeLog(`이메일 발송 실패`);
     return NextResponse.json({ result: false });
 }
 
@@ -83,6 +84,7 @@ const sendEmail = async (data: Email) => {
                 from: settingData?.sEmail,
                 ...data,
             });
+            await writeLog(`테스트 메일 발송 성공`);
             return true;
         } catch (e) {
             await writeLog(`이메일 발송 실패 서버세팅 수정 필요`);

@@ -41,8 +41,9 @@ const Page = () => {
             try {
                 const response = await fetch(`/api/sslm/email/0/0`);
                 if (response.ok) {
-                    await response.json();
-                    toast.success('테스트 발송 성공');
+                    const result = await response.json();
+                    if (result.result) toast.success('테스트 발송 성공');
+                    else toast.error('테스트 발송 실패(설정 수정)');
                 }
             } catch (error) {
                 toast.error('테스트 발송 실패');

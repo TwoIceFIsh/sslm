@@ -1,0 +1,79 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Domain {
+  dId       Int     @id @default(autoincrement())
+  dName     String?
+  dEmail    String?
+  dOwner    String?
+  dDate     String?
+  dFilePath String?
+  dType     String?
+}
+
+model Setting {
+  sId         Int      @id @default(autoincrement())
+  sEmail      String
+  sPassword   String
+  sServer     String
+  sPort       String
+  sToken      String?
+  sTarget     String?
+  sTargetName String?
+  sSsl        Boolean?
+}
+
+model Template {
+  tId      Int     @id @default(autoincrement())
+  tTitle   String?
+  tContext String?
+  tType    String?
+  tDate    String?
+}
+
+model HeaderData {
+  hId             Int       @id @default(autoincrement())
+  hStatus         String?
+  hDomain         String?
+  hProject        String?
+  hType           String?
+  hCustomer       String?
+  hRenew          String?
+  hContract       String?
+  hIssue          DateTime?
+  hExpire         DateTime?
+  hContractExpire DateTime?
+  hCost           Int?
+  hBuyer          String?
+  hManager        String?
+  hActor          String?
+  hPurpose        String?
+  hWebType        String?
+  hWebServer      String?
+  hDomainServerIp String?
+  hMemo           String?
+  hIsDeleted      Boolean?  @default(false)
+}
+
+model User {
+  id             String   @id @default(cuid())
+  name           String?
+  email          String?  @unique
+  isVarified     Boolean  @default(false)
+  hashedPassword String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model Log {
+  lId   Int       @id @default(autoincrement())
+  lDate DateTime? @default(now())
+  lText String?
+  lUser String
+}

@@ -50,7 +50,7 @@ const TemplatePage = ({ params }: { params: { tId: string } }) => {
                 tDate: today.toLocaleDateString(),
             };
 
-            const url = isNewTemplate ? `/api/template` : `/api/template/${tId}`;
+            const url = isNewTemplate ? `/api/sslm/template` : `/api/sslm/template/${tId}`;
             const response = await fetch(url, {
                 method: 'POST',
                 headers: {

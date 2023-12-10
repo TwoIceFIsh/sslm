@@ -5,7 +5,7 @@ async function saveSetting(data: Setting) {
     if (data.sSsl === undefined) data.sSsl = true;
 
     try {
-        const response = await fetch(`/api/setting`, {
+        const response = await fetch(`/api/sslm/setting`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

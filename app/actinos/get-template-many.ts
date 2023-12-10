@@ -2,7 +2,7 @@ import { Template } from '@/app/types/Template';
 
 async function getTemplateMany() {
     try {
-        const response = await fetch(`/api/template`);
+        const response = await fetch(`/api/sslm/template`);
         if (response.ok) {
             const data: Template[] = await response.json();
             if (data != null) {

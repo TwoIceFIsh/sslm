@@ -9,13 +9,13 @@ const Page = () => {
     const [users, setUsers] = useState<User[]>();
 
     const callUsers = async () => {
-        const data = await fetch('/api/user');
+        const data = await fetch('/api/sslm/user');
         setUsers(await data.json());
     };
 
     const deleteUser = async (id: string) => {
         if (confirm('정말 삭제하시겠습니까?')) {
-            const data = await fetch(`/api/user/delete`, {
+            const data = await fetch(`/api/sslm/user/delete`, {
                 method: 'POST',
                 body: JSON.stringify({
                     id: id,
@@ -29,7 +29,7 @@ const Page = () => {
     };
 
     const changeVarified = async (id: string, email: string, isVarified: boolean) => {
-        const data = await fetch('/api/user', {
+        const data = await fetch('/api/sslm/user', {
             method: 'POST',
             body: JSON.stringify({
                 id: id,

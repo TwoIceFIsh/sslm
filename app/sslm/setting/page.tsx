@@ -39,7 +39,7 @@ const Page = () => {
     const testMail = async () => {
         if (checkEmail() && checkSmtp()) {
             try {
-                const response = await fetch(`/api/email/0/0`);
+                const response = await fetch(`/api/sslm/email/0/0`);
                 if (response.ok) {
                     await response.json();
                     toast.success('테스트 발송 성공');

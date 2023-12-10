@@ -49,7 +49,7 @@ const AuthForm = () => {
 
         if (variant === 'REGISTER') {
             axios
-                .post('/api/register', data)
+                .post('/api/sslm/register', data)
                 .then((callback) => {
                     if (callback.data) {
                         toast.success('회원가입 성공(관리자 승인 필요)');

@@ -40,7 +40,7 @@ const Page = () => {
     };
     const getDomain = async () => {
         try {
-            const response = await fetch(`/api/domain`);
+            const response = await fetch(`/api/sslm/domain`);
             if (response.ok) {
                 const data = await response.json();
                 setDomainData(data);
@@ -92,11 +92,11 @@ const Page = () => {
             toast.error('양식을 선택해 주세요');
             return;
         }
-        const result = await fetch(`/api/template/${String(tId)}`);
+        const result = await fetch(`/api/sslm/template/${String(tId)}`);
         const data: Template = await result.json();
 
         if (data.tType === '이메일') {
-            const result = await fetch(`/api/email/${dId}/${String(tId)}`);
+            const result = await fetch(`/api/sslm/email/${dId}/${String(tId)}`);
             if (result.ok) {
                 const message = await result.json();
                 if (message.result == true) {
@@ -109,7 +109,7 @@ const Page = () => {
                 toast.error('서버 에러');
             }
         } else {
-            const result = await fetch(`/api/dooray/message/${dId}/${tId}`);
+            const result = await fetch(`/api/sslm/dooray/message/${dId}/${tId}`);
             if (result.ok) {
                 const messege = await result.json();
                 if (messege.result == true) {
@@ -143,7 +143,7 @@ const Page = () => {
     };
 
     const downloadXlsx = async () => {
-        const result = await fetch(`/api/domain`);
+        const result = await fetch(`/api/sslm/domain`);
         const response = await result.json();
         if (result.ok && response.length > 0) {
             downloadExcel(response);
@@ -159,7 +159,7 @@ const Page = () => {
 
         setShowContactModal(!showContactModal);
         setDomain(data);
-        const result = await fetch(`/api/template`);
+        const result = await fetch(`/api/sslm/template`);
         const output = await result.json();
         setTemplateDTOs(output);
     };

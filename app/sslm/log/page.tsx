@@ -7,7 +7,7 @@ const Page = () => {
     const [logs, setLogs] = useState<Log[]>();
 
     const callLogs = async () => {
-        const data = await fetch('/api/log');
+        const data = await fetch('/api/sslm/log');
         setLogs(await data.json());
     };
     useEffect(() => {

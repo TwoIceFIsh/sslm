@@ -25,7 +25,7 @@ const Page = () => {
     };
 
     const downloadXlsx = async () => {
-        const result = await fetch(`/api/domain2`);
+        const result = await fetch(`/api/sslm/domain2`);
         const response = await result.json();
         if (result.ok && response.length > 0) {
             downloadExcel(response);
@@ -36,7 +36,7 @@ const Page = () => {
     };
     const getDomain2 = async () => {
         try {
-            const response = await fetch(`/api/domain2`);
+            const response = await fetch(`/api/sslm/domain2`);
             if (response.ok) {
                 const data = await response.json();
                 setDomainData(data);
@@ -51,7 +51,7 @@ const Page = () => {
 
     const deleteDomain = async (dId: string) => {
         if (confirm('데이터를 삭제하시겠습니까?')) {
-            const response = await fetch(`/api/domain2/delete/${dId}`);
+            const response = await fetch(`/api/sslm/domain2/delete/${dId}`);
             if (response.ok) {
                 await getDomain2();
                 toast.success('데이터 삭제 성공');
@@ -63,7 +63,7 @@ const Page = () => {
 
     const deleteAll = async () => {
         if (confirm('전체 데이터를 삭제하시겠습니까?')) {
-            const response = await fetch(`/api/domain2/delete/all`, {});
+            const response = await fetch(`/api/sslm/domain2/delete/all`, {});
             if (response.ok) {
                 await getDomain2();
                 toast.success('데이터 전체 삭제 성공');

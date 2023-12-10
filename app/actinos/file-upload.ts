@@ -5,7 +5,7 @@ const fileUpload = async (file: Blob) => {
     formData.append('file', file, file.name); // 파일 이름을 명시
 
     try {
-        const res = await fetch('/api/upload', {
+        const res = await fetch('/api/sslm/upload', {
             method: 'POST',
             body: formData,
         });

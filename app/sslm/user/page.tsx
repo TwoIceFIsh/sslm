@@ -4,6 +4,7 @@ import PageStatement from '@/app/sslm/components/PageStatement';
 import User from '@/app/types/User';
 import date2StringFormat from '@/app/actinos/date-2-string-format';
 import { toast } from 'react-hot-toast';
+import Link from 'next/link';
 
 const Page = () => {
     const [users, setUsers] = useState<User[]>();
@@ -60,6 +61,7 @@ const Page = () => {
                             <th>이메일</th>
                             <th>가입일</th>
                             <th>로그인</th>
+                            <th>수정</th>
                             <th>삭제</th>
                         </tr>
                     </thead>
@@ -86,6 +88,14 @@ const Page = () => {
                                 >
                                     {user.isVarified ? '허용' : '차단'}
                                 </td>
+                                <td
+                                    className={`w-10 cursor-pointer rounded-md border bg-blue-500 text-sm font-bold text-white
+                                        
+                                        `}
+                                >
+                                    <Link href={`/sslm/user/edit/${user.id}`}>수정</Link>
+                                </td>
+
                                 <td
                                     className={
                                         ' w-10 cursor-pointer rounded-md  border bg-amber-200 text-sm font-bold text-gray-500 '

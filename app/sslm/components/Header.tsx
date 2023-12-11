@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import getInitMain from '@/app/actinos/init-main';
 import { signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
@@ -8,6 +8,7 @@ import { toast } from 'react-hot-toast';
 
 const Header = () => {
     const { data: session, status } = useSession();
+    const [User, setUser] = useState<boolean>(false);
 
     const callSignOut = async () => {
         toast.success('로그아웃');
@@ -22,7 +23,7 @@ const Header = () => {
             <div className={'flex items-center gap-2  p-1'}>
                 <div
                     className={'flex cursor-pointer items-center gap-2 rounded-md border p-1'}
-                    onClick={() => toast.error('뽀잉뽀잉')}
+                    onClick={() => null}
                 >
                     <div>
                         <FaAddressBook />

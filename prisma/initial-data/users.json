@@ -1,0 +1,10 @@
+[
+  {
+    "id": "clptfwo6x0000iy8nlmc3b5s7",
+    "name": "관리자",
+    "email": "admin@admin.com",
+    "hashedPassword": "$2a$10$DksdxKH92ReZ44mTD4nr1.Z3pqLIK6GPzE5CTrQU4uwkEC9uwzxA.",
+    "role": "admin",
+    "isActivated": true
+  }
+]

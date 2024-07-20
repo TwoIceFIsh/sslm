@@ -1,0 +1,113 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Domain {
+  dId     Int      @id @default(autoincrement())
+  dName   String?
+  dEmail  String?
+  dOwner  String?
+  dDate   DateTime @default(now())
+  dType   String?
+  Users   Users?   @relation(fields: [usersId], references: [id])
+  usersId String?
+}
+
+model system_Modules_Enabled {
+  id       String  @id @default(cuid())
+  name     String
+  enabled  Boolean
+  position Int
+}
+
+model Template {
+  tId      Int      @id @default(autoincrement())
+  tTitle   String   @default("")
+  tContext String   @default("")
+  tType    String   @default("")
+  tDate    DateTime @default(now())
+  Users    Users?   @relation(fields: [usersId], references: [id])
+  usersId  String?
+}
+
+model HeaderData {
+  hId             Int       @id @default(autoincrement())
+  hStatus         String?
+  hDomain         String?
+  hProject        String?
+  hType           String?
+  hCustomer       String?
+  hRenew          String?
+  hContract       String?
+  hIssue          DateTime?
+  hExpire         DateTime?
+  hContractExpire DateTime?
+  hCost           Int?
+  hBuyer          String?
+  hManager        String?
+  hActor          String?
+  hPurpose        String?
+  hWebType        String?
+  hWebServer      String?
+  hDomainServerIp String?
+  hMemo           String?
+  hIsDeleted      Boolean?  @default(false)
+  Users           Users?    @relation(fields: [usersId], references: [id])
+  usersId         String?
+}
+
+model Users {
+  id             String       @id @default(cuid())
+  name           String       @default("")
+  email          String       @unique
+  hashedPassword String       @default("")
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  role           String       @default("user")
+  Logs           Logs[]
+  Settings       Settings?
+  isActivated    Boolean      @default(false)
+  Domain         Domain[]
+  HeaderData     HeaderData[]
+  Template       Template[]
+}
+
+model Settings {
+  id            String   @id @default(uuid())
+  mail_email    String
+  mail_password String
+  mail_server   String
+  mail_port     String
+  activeSsl     Boolean?
+  Users         Users?   @relation(fields: [userId], references: [id])
+  userId        String?  @unique
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  Dooray Dooray?
+}
+
+model Logs {
+  id        String   @id @default(cuid())
+  text      String   @default("")
+  userId    String   @default("")
+  User      Users?   @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Dooray {
+  id    String @id @default(cuid())
+  token String @default("")
+
+  Settings   Settings? @relation(fields: [settingsId], references: [id])
+  settingsId String?   @unique
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
